@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pokemon-tcg-engine"
+version = "0.1.0"
+description = "This project is a Python implementation of the Pokémon trading card game. It includes classes and functions for representing and managing cards, decks, and game mechanics. Eventually the idea is to add additional features for AI opponents, a user interface, and online multiplayer support."
+authors = ["Eduardo Grove <edo.grove@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pokemon_tcg_engine"}]
+
+[tool.poetry.dependencies]
+python = "3.10.8"
+pygame = "^2.1.2"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^0.991"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,21 @@
+pokemon-trading-card-game
+├── card.py
+├── deck.py
+├── game.py
+├── ai.py
+├── ui.py
+├── online.py
+├── data
+│   ├── cards.json
+│   ├── abilities.json
+│   ├── energy_types.json
+│   └── decks.json
+├── tests
+│   ├── test_card.py
+│   ├── test_deck.py
+│   └── test_game.py
+├── images
+│   ├── card_backs.png
+│   ├── energy_symbols.png
+│   └── card_art.png
+└── README.md
