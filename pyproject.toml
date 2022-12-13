@@ -9,6 +9,7 @@ packages = [{include = "pokemon_tcg_engine"}]
 [tool.poetry.dependencies]
 python = "3.10.8"
 pygame = "^2.1.2"
+bumpversion = "^0.6.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.991"

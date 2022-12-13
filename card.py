@@ -1,5 +1,6 @@
 from typing import Optional, List
 
+from ability import Ability
 from enumerators import EnergyTypes, CardClasses
 
 
@@ -59,38 +60,37 @@ class TrainerCard(Card):
 
 
 class PokemonCard(Card):
-    attack: int
-    defense: int
-    hit_points: int
-    abilities: List[str]
-    energies: List[EnergyCard]
+    name: str
+    health_points: int
+    abilities: List[Ability]
+    energies:  List[EnergyCard]
     pokemon_type: str
     can_attack: bool
 
-    def __init__(self, name, attack, defense, hit_points):
+    def __init__(self, name: str, health_points: int, pokemon_type: str):
+        if pokemon_type not in EnergyTypes:
+            raise ValueError(f"Invalid pokemon type: {pokemon_type}")
         super().__init__(name, card_class=CardClasses.POKEMON.value)
-        self.attack = attack
-        self.defense = defense
-        self.hit_points = hit_points
+        self.health_points = health_points
+        self.pokemon_type = pokemon_type
         self.abilities = []
-        self.energy_types = []
 
-    def add_ability(self, ability):
+    def add_ability(self, ability: Ability):
         # TODO: same as a trainer card, abilities should be able to be generalized
         # Add an ability to the Pokémon's abilities
         self.abilities.append(ability)
 
     def add_energy_type(self, energy: EnergyCard):
+        # TODO: add energy card amount (e.g. some cards have 2 energy)
         # Add an energy card_class to the Pokémon's energy types
-        self.energy_types.append(energy)
+        self.energies.append(energy)
 
     def use_ability(self, ability):
         # TODO: figure out how to attack with a card
-        pass
+        self.abilities.append(ability)
 
     def remove_energy(self, energy: EnergyCard):
         self.energies.remove(energy)
-        pass
 
     def knock_out(self):
         # TODO: logic for dead cards
