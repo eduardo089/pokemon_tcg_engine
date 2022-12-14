@@ -10,12 +10,12 @@ deck = Deck()
 # 20 Pokémon cards
 pikachu = PokemonCard("Pikachu", "lightning", 40, 50, 60)
 pikachu.add_ability("Thunder Shock")
-pikachu.add_energy_type("lightning")
+pikachu.attach_energy("lightning")
 deck.add_card(pikachu)
 
 charmander = PokemonCard("Charmander", "fire", 50, 60, 70)
 charmander.add_ability("Flame Tail")
-charmander.add_energy_type("fire")
+charmander.attach_energy("fire")
 deck.add_card(charmander)
 
 ...

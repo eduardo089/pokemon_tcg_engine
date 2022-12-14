@@ -2,7 +2,7 @@
 name = "bump2version"
 version = "1.0.1"
 description = "Version-bump your software with a single command!"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5"
 
@@ -10,7 +10,7 @@ python-versions = ">=3.5"
 name = "bumpversion"
 version = "0.6.0"
 description = "Version-bump your software with a single command!"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -21,7 +21,7 @@ bump2version = "*"
 name = "mypy"
 version = "0.991"
 description = "Optional static typing for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -40,7 +40,7 @@ reports = ["lxml"]
 name = "mypy-extensions"
 version = "0.4.3"
 description = "Experimental type system extensions for programs checked with the mypy typechecker."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -56,7 +56,7 @@ python-versions = ">=3.6"
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -64,14 +64,14 @@ python-versions = ">=3.7"
 name = "typing-extensions"
 version = "4.4.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10.8"
-content-hash = "7cb5c8bea12a119eedfcbc088e2143d836e2a6aa2a0880da55e9d81667ea8b42"
+content-hash = "7495988867f7dd92be70e689b4bfee5b5d58cd8661eb9330671cee7ce9f5398f"
 
 [metadata.files]
 bump2version = [

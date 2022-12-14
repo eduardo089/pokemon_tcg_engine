@@ -1,10 +1,18 @@
 from enum import Enum
 
-class EnergyTypes(Enum):
+
+class ExtendedEnum(Enum):
+    # This is so you can check if a value is in all possible values of an enum
+    @classmethod
+    def list(cls):
+        return list(map(lambda c: c.value, cls))
+
+
+class EnergyTypes(ExtendedEnum):
     FIRE = "fire"
     WATER = "water"
     GRASS = "grass"
-    LIGHTNING = "lightning"
+    LIGHTNING = "electric"
     PSYCHIC = "psychic"
     FIGHTING = "fighting"
     DARKNESS = "darkness"
@@ -13,7 +21,7 @@ class EnergyTypes(Enum):
     TRAINER = "trainer"
 
 
-class CardClasses(Enum):
+class CardClasses(ExtendedEnum):
     TRAINER = "trainer"
     ENERGY = "energy"
     POKEMON = "pokemon"

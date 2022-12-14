@@ -1,6 +1,5 @@
 from typing import Optional, List
 
-from ability import Ability
 from enumerators import EnergyTypes, CardClasses
 
 
@@ -11,7 +10,7 @@ class Card:
     def __init__(self, name: str, card_class: str):
         self.name = name
         # Check that the energy card_class is valid
-        if card_class not in CardClasses:
+        if card_class not in CardClasses.list():
             raise ValueError(f"Invalid card class: {card_class} should be one of either trainer, energy or pokemon")
         self.card_class = card_class
 
@@ -31,20 +30,23 @@ class Card:
 
 
 class EnergyCard(Card):
-    def __init__(self, name, energy_type):
-        # Call the parent class's constructor to initialize the card
-        super().__init__(name, card_class=CardClasses.ENERGY.value)
+    amount: int
+    energy_type: str
 
-        # Check that the energy card_class is valid
-        if energy_type not in EnergyTypes:
-            raise ValueError(f"Invalid energy type: {energy_type}")
+    def __init__(self, name: str, energy_type: str, amount: int = 1):
+        """
+        Instance an Energy Card
+
+        :param name: Name of the card
+        :param energy_type: Type of the card, should be one of EnergyTypes
+        :param amount: Amount of energy the card is worth
+        """
+        super().__init__(name, "energy")
+        # Check that the energy type is valid
+        if energy_type not in EnergyTypes.list():
+            raise ValueError(f"Invalid energy type: {energy_type} should be one of {EnergyTypes.list()}")
         self.energy_type = energy_type
-
-    def attach(self, game, player, pokemon):
-        # TODO: figure out how to attach energies to cards
-        # Perform actions specific to energy cards, such as
-        # attaching the card to a Pokémon in play
-        pass
+        self.amount = amount
 
 
 class TrainerCard(Card):
@@ -60,6 +62,9 @@ class TrainerCard(Card):
 
 
 class PokemonCard(Card):
+    # FIXME: import should be on top, this is a hack not to get circular imports
+    from ability import Ability
+
     name: str
     health_points: int
     abilities: List[Ability]
@@ -68,19 +73,29 @@ class PokemonCard(Card):
     can_attack: bool
 
     def __init__(self, name: str, health_points: int, pokemon_type: str):
-        if pokemon_type not in EnergyTypes:
+        """
+        Instance a new Pokemon Card
+
+        :param name: Name of the Pokemon Card
+        :param health_points: Amount of health points
+        :param pokemon_type: Type of the pokemon, one of CardClasses.POKEMON values
+        """
+        if pokemon_type not in EnergyTypes.list():
+            print(EnergyTypes)
             raise ValueError(f"Invalid pokemon type: {pokemon_type}")
         super().__init__(name, card_class=CardClasses.POKEMON.value)
         self.health_points = health_points
-        self.pokemon_type = pokemon_type
         self.abilities = []
+        self.energies = []
+        self.pokemon_type = pokemon_type
+        self.can_attack = True
 
     def add_ability(self, ability: Ability):
         # TODO: same as a trainer card, abilities should be able to be generalized
         # Add an ability to the Pokémon's abilities
         self.abilities.append(ability)
 
-    def add_energy_type(self, energy: EnergyCard):
+    def attach_energy(self, energy: EnergyCard):
         # TODO: add energy card amount (e.g. some cards have 2 energy)
         # Add an energy card_class to the Pokémon's energy types
         self.energies.append(energy)
@@ -95,3 +110,5 @@ class PokemonCard(Card):
     def knock_out(self):
         # TODO: logic for dead cards
         pass
+
+

@@ -1,5 +1,4 @@
 from typing import List
-
 from card import EnergyCard
 
 
@@ -19,6 +18,9 @@ class Ability:
         return self.damage
 
     @staticmethod
-    def has_required_energy(energy_req: List[EnergyCard], energy_list: List[EnergyCard]):
+    def has_required_energy(energy_req: List[EnergyCard], energy_list: List[EnergyCard]) -> bool:
         # TODO: add logic to check energy requirements
-        pass
+        energy_req_set = set(energy_req)
+        energy_list_set = set(energy_list)
+
+        return energy_req_set.issubset(energy_list_set)

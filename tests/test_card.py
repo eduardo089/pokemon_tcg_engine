@@ -39,40 +39,12 @@ class TestCard(unittest.TestCase):
 class TestEnergyCard(unittest.TestCase):
     def test_energy_card(self):
         # Create an EnergyCard instance
-        card = EnergyCard("Fire Energy", "energy", "fire")
+        card = EnergyCard(name="Fire Energy", energy_type="fire")
 
         # Check that the card's attributes are set correctly
         self.assertEqual(card.name, "Fire Energy")
-        self.assertEqual(card.card_class, "energy")
         self.assertEqual(card.energy_type, "fire")
-
-    def test_play(self):
-        # Create an EnergyCard instance
-        card = EnergyCard("Fire Energy", "energy", "fire")
-
-        # Check that the play method raises a NotImplementedError
-        with self.assertRaises(NotImplementedError):
-            card.play()
-
-    def test_use_effect(self):
-        # Create an EnergyCard instance
-        card = EnergyCard("Fire Energy", "energy", "fire")
-
-        # Check that the use_effect method raises a NotImplementedError
-        with self.assertRaises(NotImplementedError):
-            card.use_effect()
-
-    def test_discard(self):
-        # Create an EnergyCard instance
-        card = EnergyCard("Fire Energy", "energy", "fire")
-
-        # Check that the discard method returns True
-        self.assertTrue(card.discard())
-
-    def test_invalid_energy_type(self):
-        # Check that an EnergyCard with an invalid energy type raises a ValueError
-        with self.assertRaises(ValueError):
-            card = EnergyCard("Fire Energy", "energy", "invalid")
+        self.assertEqual(card.amount, 1)
 
 
 if __name__ == "__main__":
