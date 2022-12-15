@@ -101,6 +101,8 @@ class PokemonCard(Card):
         self.energies.append(energy)
 
     def use_ability(self, ability):
+        # TODO: implement simple attack system with inputs
+        # your pokemkn (self) and the other pokemon plus maybe the ability???
         # TODO: figure out how to attack with a card
         self.abilities.append(ability)
 
