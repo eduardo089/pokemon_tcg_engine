@@ -18,6 +18,7 @@ class EnergyTypes(ExtendedEnum):
     DARKNESS = "darkness"
     METAL = "metal"
     FAIRY = "fairy"
+    NORMAL = "normal"
     TRAINER = "trainer"
 
 

@@ -1,6 +1,6 @@
 import unittest
 
-from card import Card, EnergyCard
+from cards.card import Card
 
 
 class TestCard(unittest.TestCase):
@@ -34,17 +34,6 @@ class TestCard(unittest.TestCase):
 
         # Check that the discard method returns True
         self.assertTrue(card.discard())
-
-
-class TestEnergyCard(unittest.TestCase):
-    def test_energy_card(self):
-        # Create an EnergyCard instance
-        card = EnergyCard(name="Fire Energy", energy_type="fire")
-
-        # Check that the card's attributes are set correctly
-        self.assertEqual(card.name, "Fire Energy")
-        self.assertEqual(card.energy_type, "fire")
-        self.assertEqual(card.amount, 1)
 
 
 if __name__ == "__main__":

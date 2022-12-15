@@ -1,5 +1,6 @@
 # Import the Card and Deck classes from earlier
-from card import Card, EnergyCard, TrainerCard, PokemonCard
+from cards.card import TrainerCard, PokemonCard
+from cards.energy_card import EnergyCard
 from deck import Deck
 
 # Create a new deck
