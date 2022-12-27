@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 from ability import Ability
 from cards.card import Card
@@ -9,7 +9,7 @@ from enumerators import EnergyTypes, CardClasses
 class PokemonCard(Card):
     name: str
     health_points: int
-    abilities: List[Ability]
+    abilities: Dict[str, Ability]
     energies:  List[EnergyCard]
     pokemon_type: str
     is_ko: bool
@@ -27,15 +27,21 @@ class PokemonCard(Card):
             raise ValueError(f"Invalid pokemon type: {pokemon_type}")
         super().__init__(name, card_class=CardClasses.POKEMON.value)
         self.health_points = health_points
-        self.abilities = []
+        self.abilities = {}
         self.energies = []
         self.pokemon_type = pokemon_type
         self.is_ko = False
 
     def add_ability(self, ability: Ability) -> None:
+        """
+        Adds an ability to a Pokemon card
+
+        :param ability:
+        :return:
+        """
         # TODO: same as a trainer card, abilities should be able to be generalized
         # Add an ability to the Pokémon's abilities
-        self.abilities.append(ability)
+        self.abilities[ability.name] = ability
 
     def attach_energy(self, energy: EnergyCard) -> None:
         """
@@ -50,25 +56,34 @@ class PokemonCard(Card):
 
     def remove_energy(self, energy: EnergyCard) -> None:
         """
-        Removes an energy attached to a Pokemon card
+        Removes an energy attached to a Pokémon card
 
         :param energy: The EnergyCard object to be removed
         :return: None
         """
         self.energies.remove(energy)
 
-    def use_ability(self, ability: Ability, other_pokemon):
+    def use_ability(self, ability_str: str, other_pokemon):
         if not isinstance(other_pokemon, PokemonCard):
             raise ValueError(f"Other Pokemon should be PokemonCard type but got {type(other_pokemon)} instead")
+        if ability_str not in self.abilities.keys():
+            raise ValueError(f"Ability {ability_str} not found")
 
+        # TODO: Eventually you would need not only to pass the other pokemon but the whole game in order
+        # to make the ability work
+        self.abilities[ability_str].use(my_pokemon=self, other_pokemon=other_pokemon)
 
+    def take_damage(self, damage) -> None:
+        """
+        Takes damage from the attack
 
+        :param damage: The amount of damage to be taken
+        :return: None
+        """
+        self.health_points -= damage
+        self.check_ko()
 
-        # TODO: implement simple attack system with inputs
-        # your pokemkn (self) and the other pokemon plus maybe the ability???
-        # TODO: figure out how to attack with a card
-        pass
-
-    def knock_out(self):
-        # TODO: logic for dead cards
-        pass
+    def check_ko(self) -> None:
+        if self.health_points <= 0:
+            self.is_ko = True
+            print(f"Pokemon {self.name} is KO")

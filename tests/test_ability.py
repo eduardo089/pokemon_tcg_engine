@@ -23,7 +23,7 @@ class TestCard(unittest.TestCase):
         expected_result = True
 
         # act
-        actual_result = Ability.has_required_energy(energy_reqs, energies)
+        actual_result = Ability._has_required_energy(energy_reqs, energies)
 
         # assert
         self.assertEqual(expected_result, actual_result)

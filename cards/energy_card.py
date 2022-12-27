@@ -3,8 +3,9 @@ from enumerators import EnergyTypes
 
 
 class EnergyCard(Card):
-    amount: int
+    name: str
     energy_type: str
+    amount: int
 
     def __init__(self, name: str, energy_type: str, amount: int = 1):
         """
