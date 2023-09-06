@@ -7,41 +7,33 @@ from enumerators import EnergyTypes, CardClasses
 
 
 class PokemonCard(Card):
-    name: str
     health_points: int
     abilities: Dict[str, Ability]
-    energies:  List[EnergyCard]
+    energies: List[EnergyCard]
     pokemon_type: str
     is_ko: bool
 
-    def __init__(self, name: str, health_points: int, pokemon_type: str) -> None:
+    def __init__(self, name: str, health_points: int, pokemon_type: str, abilities: List[Ability]) -> None:
         """
-        Instance a new Pokemon Card
+        Instance a new Pokémon Card
 
-        :param name: Name of the Pokemon Card
+        :param name: Name of the Pokémon Card
         :param health_points: Amount of health points
-        :param pokemon_type: Type of the pokemon, one of CardClasses.POKEMON values
+        :param pokemon_type: Type of the Pokémon, one of CardClasses.POKEMON values
         """
         if pokemon_type not in EnergyTypes.list():
             print(EnergyTypes)
             raise ValueError(f"Invalid pokemon type: {pokemon_type}")
         super().__init__(name, card_class=CardClasses.POKEMON.value)
         self.health_points = health_points
+        # TODO: add abilities as strings
+        abilities = {}
+        for ability in abilities:
+            self.abilities[ability.name] = ability
         self.abilities = {}
         self.energies = []
         self.pokemon_type = pokemon_type
         self.is_ko = False
-
-    def add_ability(self, ability: Ability) -> None:
-        """
-        Adds an ability to a Pokemon card
-
-        :param ability:
-        :return:
-        """
-        # TODO: same as a trainer card, abilities should be able to be generalized
-        # Add an ability to the Pokémon's abilities
-        self.abilities[ability.name] = ability
 
     def attach_energy(self, energy: EnergyCard) -> None:
         """
@@ -87,3 +79,12 @@ class PokemonCard(Card):
         if self.health_points <= 0:
             self.is_ko = True
             print(f"Pokemon {self.name} is KO")
+
+    def get_card_info(self) -> str:
+        return f"Card name: {self.name}\n" \
+               f"Card class: {self.card_class}\n" \
+               f"Health Points: {self.health_points}"
+        # TODO: add abilities as string
+
+    # TODO: add evolution logic
+

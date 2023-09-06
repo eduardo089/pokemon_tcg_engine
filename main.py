@@ -1,24 +1,42 @@
+from typing import List
+
+from cards.card import Card
 from cards.pokemon_card import PokemonCard
 from cards.energy_card import EnergyCard
 from ability import Ability
 
+from config import pokemon_data, energy_data
+from deck import Deck
+
 if __name__ == '__main__':
+    # Instance the mock cards
+    pokemon_cards = []
+    energy_cards = []
 
-    pikachu = PokemonCard(name='Pikachu', health_points=100, pokemon_type='electric')
-    charmander = PokemonCard(name='Charmander', health_points=100, pokemon_type='fire')
+    for data in pokemon_data:
+        abilities = []
+        for ability_data in data["abilities"]:
+            ability = Ability(**ability_data)
+            abilities.append(ability)
+        # Remove the abilities key from the data dictionary
+        data.pop("abilities")
+        pokemon_card = PokemonCard(**data, abilities=abilities)
+        pokemon_cards.append(pokemon_card)
 
-    print(charmander.health_points)
-    electric_energy = EnergyCard(name='Electric Energy', energy_type='electric')
-    fire_energy = EnergyCard(name='Fire Energy', energy_type='fire')
-    pikachu.attach_energy(electric_energy)
-    charmander.attach_energy(fire_energy)
+    for data in energy_data:
+        energy_card = EnergyCard(**data)
+        energy_cards.append(energy_card)
 
-    thundershock = Ability(name='Thundershock', damage=110, energy_reqs={'electric': 1})
-    pikachu.add_ability(thundershock)
+    # Combine the cards into a single list
+    cards: List[Card] = pokemon_cards + energy_cards
 
-    pikachu.use_ability('Thundershock', charmander)
+    print(type(cards))
 
-    print(charmander.health_points)
+    # Instance the deck
+    deck = Deck(cards=cards)
+
+
+
 
 
 

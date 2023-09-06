@@ -1,22 +1,24 @@
 from typing import List, Dict
+
+from pydantic import BaseModel
+
 from cards.energy_card import EnergyCard
 
 
-class Ability:
+class Ability(BaseModel):
     name: str
     description: str
     damage: int
     energy_reqs: Dict[str, int]
 
     def __init__(self, name: str, damage: int, energy_reqs: Dict[str, int], description: str = ''):
+        super().__init__()
         self.name = name
         self.damage = damage
         self.energy_reqs = energy_reqs
         self.description = description
 
     def _has_required_energy(self, energy_list: List[EnergyCard]) -> bool:
-        # TODO: add logic to check energy requirements
-        # List to dict:
         dict_energies: Dict[str, int] = {}  # type: ignore
         for energy in energy_list:
             try:
@@ -50,3 +52,12 @@ class Ability:
             print(f"Pokemon {my_pokemon.name} doesn't have enough energy to use {self.name}")
         else:
             other_pokemon.take_damage(self.damage)
+
+    # TODO: implement ability effects:
+    # all abilities are simplified into either:
+    # draw cards
+    # flip coins
+    # heal
+    # add or remove pokemon
+    # add or remove energies
+

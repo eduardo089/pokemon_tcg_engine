@@ -13,3 +13,6 @@ class TrainerCard(Card):
         # applying the card's effect to the game state
         pass
 
+    def get_card_info(self):
+        pass
+
